@@ -1,0 +1,274 @@
+$contrast_dark: #0e123b;
+$contrast_light: #ffffff;
+$contrast_shade6: #e3e4e8;
+$contrast_shade7: #f4f4f6;
+$accent-lemon_standard: #feda2e;
+$accent-lemon_lighter1: #fee87f;
+
+$progressWidth: 0;
+$volumeWidth: 0;
+$hoverWidth: 0;
+
+.VideoPlayer {
+    aspect-ratio: 16/9;
+    position: relative;
+    min-width: 320px;
+    background-color: $contrast_dark;
+
+    .video-wrapper {
+        height: 100%;
+    }
+
+    video {
+        width: 100%;
+        max-height: 100%;
+    }
+
+    &.fullscreenMode {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .overlay {
+        color: $contrast_light;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 50;
+        background: linear-gradient(
+            180deg,
+            rgba($contrast_dark, 0) 0%,
+            rgba($contrast_dark, 0.25) 100%
+        );
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: flex-end;
+        transition: opacity 150ms ease-in;
+
+        .controls {
+            display: flex;
+            height: 32px;
+            align-items: center;
+            flex: 1 1 100%;
+            background-color: rgba($contrast_dark, 0.4);
+            backdrop-filter: blur(5px);
+            border-radius: 4px;
+            margin: 0px 24px 24px 24px;
+
+            .volumeTimeWrapper {
+                width: 125px;
+                position: relative;
+                flex-shrink: 0;
+
+                &-time {
+                    color: $contrast_light;
+                    padding-left: 7px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    transform: translateY(1px);
+
+                    .separator {
+                        display: inline-block;
+                        margin: 0 4px;
+                    }
+                }
+
+                &-volume {
+                    width: 100%;
+                    height: 100%;
+                    padding-left: 7px;
+                    position: absolute;
+                    right: 0;
+                    top: -2px;
+                    display: flex;
+                }
+            }
+
+            .invisible {
+                background: none;
+                border: none;
+                outline: none;
+                display: inline-block;
+                z-index: 60;
+                cursor: pointer;
+                padding: 0;
+
+                svg {
+                    fill: $contrast_light;
+                    width: 22px;
+                    height: 22px;
+                }
+            }
+
+            .togglePlay {
+                border-radius: 4px 0px 0px 4px;
+                margin-right: 11px;
+                background-color: $accent-lemon_standard;
+                svg {
+                    color: $contrast_dark;
+                    position: relative;
+                    top: 2px;
+                }
+            }#E0BE1A
+
+            .fullscreenBtn {
+                margin-right: 7px;
+
+                .fullScreenIcon {
+                    position: relative;
+                    top: 3px;
+
+                    svg {
+                        fill: $contrast_shade6;
+                        width: 18px;
+                        height: 18px;
+                    }
+
+                    &:hover {
+                        svg {
+                            fill: $contrast_light;
+                        }
+                    }
+                }
+            }
+
+            .toggleMute {
+                display: flex;
+                align-items: center;
+                flex-shrink: 0;
+                margin-right: 24px;
+
+                .Icon {
+                    flex-shrink: 0;
+                    width: 32px !important;
+                    height: 32px !important;
+
+                    svg {
+                        padding: 5px;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                &:hover {
+                    .volumeBar {
+                        display: block;
+                        transform: translateY(-3px);
+                        cursor: pointer;
+                    }
+
+                    .volumeTimeWrapper-time {
+                        display: none;
+                    }
+                }
+            }
+
+            .progressWrapper {
+                flex-grow: 1;
+                margin-right: 24px;
+                height: 14px;
+                display: flex;
+                align-items: center;
+                transform: translateY(1px);
+                cursor: pointer;
+            }
+
+            .videoProgress {
+                height: 8px;
+                width: 100%;
+                border-radius: 4px !important;
+            }
+
+            .videoProgress,
+            .volumeBar {
+                -webkit-appearance: none;
+                width: 100%;
+                height: 8px;
+                background: #b7b8c4;
+                border-radius: 4px;
+                outline: none;
+                position: relative;
+                overflow: hidden;
+            }
+
+            //   progress within input range
+
+            .videoProgress::before {
+                content: '';
+                height: 8px;
+                position: absolute;
+                width: var(--progressWidth);
+                background-color: $contrast_shade7;
+                z-index: 10;
+                top: 0;
+                left: 0;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+
+            .videoProgress::-webkit-slider-thumb,
+            .volumeBar::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 8px;
+                width: 8px;
+                border-radius: 50%;
+                background-color: $contrast_shade7;
+                z-index: 20;
+                position: relative;
+                background-color: transparent;
+            }
+
+            .volumeBar {
+                display: none;
+            }
+
+            .volumeBar::before {
+                content: '';
+                height: 8px;
+                position: absolute;
+                width: var(--volumeWidth);
+                background-color: $contrast_shade7;
+                z-index: 10;
+                top: 0;
+                left: 0;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    .progressBar {
+        display: block;
+    }
+
+    .progressWrapper {
+        position: relative;
+    }
+
+    .selectionIndicator {
+        width: 8px;
+        height: 8px;
+        margin: 4px;
+        border-radius: 50%;
+        background-color: $accent-lemon_lighter1;
+        cursor: pointer;
+        left: calc(var(--hoverWidth) - 8px);
+        position: absolute;
+        z-index: 60;
+        visibility: hidden;
+    }
+    .ant-tooltip {
+        &-inner {
+            border-radius: 4px;
+            opacity: 1;
+            background-color: $contrast_dark;
+            color: $contrast_light;
+            font-weight: 400;
+            font-size: 13px;
+        }
+    }
+}
+
